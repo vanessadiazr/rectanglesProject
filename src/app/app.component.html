@@ -1,0 +1,7 @@
+<input #box (keyup)="onKey(box.value)">
+<div class="container" (window:resize)="onKey(box.value)"
+[ngStyle]="{'width.px': w}">
+    <div class="rectangle" *ngFor="let rectangle of generateArray()"
+    [ngStyle]="{'width.px': a, 'height.px': b, 'max-width.px': 25, 'max-height.px': 14.70}">
+    </div>
+</div>
