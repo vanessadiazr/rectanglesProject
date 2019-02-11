@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   //a = largura 
   a:number;
   b: number;
-  columns: number;
+  columnSize: number;
   rows: number;
 
 
@@ -25,14 +25,13 @@ export class AppComponent implements OnInit {
     this.getWindowDimensions();
     this.numberRectangles = value;
     console.log(value);
-    this.a = (this.h * this.w)/value;
+
+    this.columnSize = this.getColumnSize(this.h, value, this.w);
+    this.a = this.w/this.columnSize -4;
     this.b = this.a/1.7;
+    
 
-    this.columns = this.w/(this.a + 4);
-    this.rows = this.h/(this.b + 4);
-
-      console.log(this.a);
-      console.log(this.b);
+      console.log(this.columnSize);
   }
 
   generateArray(){
@@ -46,6 +45,24 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     
+  }
+
+  getColumnSize(h:number, n:number, w:number){
+
+    let a = (1.7*h)/n;
+    let b = -1.7*4+4;
+    let c = -w;
+    let frigles = Math.pow(b, 2) - 4*a*c;
+  
+    let result1 = (-b + Math.sqrt(frigles))/(2*a);
+    let result2 = (-b - Math.sqrt(frigles))/(2*a);
+
+    if(result1 > 0){
+      return result1;
+    } 
+      return result2;
+
+
   }
 
 
